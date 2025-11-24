@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "my-codex-utils"
+version = "0.1.0"
+description = "Utilities for inspecting/resuming OpenAI Codex CLI sessions stored under ~/.codex"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "Diego Prada-Gracia" }
+]
+
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/uibcdf/my-codex-utils"
+
+[project.scripts]
+codex-list-sessions = "my_codex_utils.cli_list_sessions:main"
+codex-resume-last   = "my_codex_utils.cli_resume_last:main"
