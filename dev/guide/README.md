@@ -14,15 +14,14 @@ sessions stored under `~/.codex`.
   - Show creation and last-activity timestamps.
   - Show the `codex resume <session_id>` command.
   - Show the last user message for context.
-  - Optionally call a local LLM (via `CODEX_SUMMARIZER_CMD`) to generate a
+  - Optionally call a local/remote LLM (via `CODEX_SUMMARIZER_CMD`) to generate a
     ~5–6 line natural-language summary per session.
-- Resume the most recent session for the current repo via `codex-resume-last`.
+  - Resume the most recent session for the current repo via `codex-resume-last`.
 
 ## Code structure
 
-- `src/my_codex_utils/__init__.py`
-- `src/my_codex_utils/sessions.py`
-- `src/my_codex_utils/cli_list_sessions.py`
-- `src/my_codex_utils/cli_resume_last.py`
+- `my_codex_utils/__init__.py`
+- `my_codex_utils/sessions.py`
+- `my_codex_utils/cli_list_sessions.py`
+- `my_codex_utils/cli_resume_last.py`
 - `tests/`
-

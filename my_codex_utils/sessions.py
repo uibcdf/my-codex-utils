@@ -168,9 +168,7 @@ def build_session_context(lines: List[Dict[str, Any]], max_events: int = 40) -> 
 
 
 def call_free_llm_summarizer(context_text: str, lang: str) -> str:
-    cmd = os.environ.get("CODEX_SUMMARIZER_CMD")
-    if not cmd:
-        return ""
+    cmd = os.environ.get("CODEX_SUMMARIZER_CMD", "").strip()
 
     if lang == "es":
         prompt = (
@@ -200,6 +198,9 @@ def call_free_llm_summarizer(context_text: str, lang: str) -> str:
             "=== END OF HISTORY ===\n\n"
             "Now produce the summary:\n"
         )
+
+    if not cmd:
+        return ""
 
     try:
         import shlex
@@ -299,13 +300,17 @@ def print_sessions_list(
     if num is not None and num > 0:
         sessions = sessions[:num]
 
+    display_sessions = list(reversed(sessions))
+    total = len(display_sessions)
+
     remote_url, repo_root = get_current_repo_info()
     print(f"{T['header']} {remote_url or repo_root}")
     print()
 
     use_llm = bool(os.environ.get("CODEX_SUMMARIZER_CMD")) if show_summaries else False
 
-    for i, s in enumerate(sessions, start=1):
+    for offset, s in enumerate(display_sessions):
+        i = total - offset
         created = iso_to_local(s.created)
         ended = iso_to_local(s.ended)
         last_msg = s.last_user_msg or "(no user message)"
